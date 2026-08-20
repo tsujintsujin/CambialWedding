@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+::selection {
+  background: #7a1f2b;
+  color: #f7f4f1;
+}
