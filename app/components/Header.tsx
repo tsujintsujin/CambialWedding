@@ -1,31 +1,51 @@
 "use client";
 
 import { useState } from "react";
+import { useSectionNav } from "./SectionNavContext";
 
 const LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Collection", href: "#collection" },
-  { label: "Artists", href: "#artists" },
-  { label: "About", href: "#about" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", id: "home" },
+  { label: "Collection", id: "collection" },
+  { label: "Artists", id: "artists" },
+  { label: "About", id: "about" },
+  { label: "Blog", id: "blog" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { goToId } = useSectionNav();
+
+  const handleClick = (id: string) => {
+    goToId(id);
+    setOpen(false);
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-6 md:px-12">
-        <a href="#home" className="font-display italic text-xl tracking-wide text-paper">
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            handleClick("home");
+          }}
+          className="font-display italic text-xl tracking-wide text-paper"
+        >
           GalleryType
         </a>
 
         <nav className="hidden md:block">
           <ul className="flex items-center gap-9 text-[13px] uppercase tracking-widest2 text-paper/80">
             {LINKS.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} className="transition-colors hover:text-paper">
+              <li key={link.id}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleClick(link.id);
+                  }}
+                  className="transition-colors hover:text-paper"
+                >
                   {link.label}
                 </a>
               </li>
@@ -47,8 +67,14 @@ export default function Header() {
         <nav className="border-t border-line bg-ink/95 px-6 py-6 backdrop-blur md:hidden">
           <ul className="flex flex-col gap-5 text-sm uppercase tracking-widest2 text-paper/80">
             {LINKS.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} onClick={() => setOpen(false)}>
+              <li key={link.id}>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleClick(link.id);
+                  }}
+                >
                   {link.label}
                 </a>
               </li>

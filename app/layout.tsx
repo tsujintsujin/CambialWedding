@@ -25,8 +25,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${display.variable} ${body.variable} font-body bg-ink text-paper antialiased`}>
+    <html lang="en" className="h-full overflow-hidden">
+      <body className={`${display.variable} ${body.variable} h-full overflow-hidden font-body bg-ink text-paper antialiased`}>
         {children}
       </body>
     </html>

@@ -1,9 +1,14 @@
+"use client";
+
 import Placeholder from "./Placeholder";
+import { useSectionNav } from "./SectionNavContext";
 
 export default function FeaturedArtwork() {
+  const { goToId } = useSectionNav();
+
   return (
-    <section id="artists" className="bg-ink-soft px-6 py-24 md:px-12">
-      <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-2 md:items-center md:gap-20">
+    <section className="flex h-full w-full items-center overflow-y-auto bg-ink-soft px-6 md:px-12">
+      <div className="mx-auto grid w-full max-w-[1400px] gap-12 md:grid-cols-2 md:items-center md:gap-20">
         <Placeholder label="Untitled" className="aspect-[3/4] w-full" />
         <div>
           <p className="mb-4 text-[12px] uppercase tracking-widest2 text-muted">Recent artworks</p>
@@ -14,7 +19,11 @@ export default function FeaturedArtwork() {
             through fragmented, layered brushwork.
           </p>
           <a
-            href="#collection"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              goToId("collection");
+            }}
             className="mt-8 inline-block border-b border-accent-bright pb-1 text-[12px] uppercase tracking-widest2 text-paper/80 transition-colors hover:text-paper"
           >
             See this artwork

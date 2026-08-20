@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Placeholder from "./Placeholder";
+import { useSectionNav } from "./SectionNavContext";
 
 const EVENTS = [
   {
@@ -21,10 +22,11 @@ const EVENTS = [
 export default function Events() {
   const [index, setIndex] = useState(0);
   const event = EVENTS[index];
+  const { goToId } = useSectionNav();
 
   return (
-    <section id="blog" className="bg-ink-soft px-6 py-24 md:px-12">
-      <div className="mx-auto max-w-[1400px]">
+    <section className="flex h-full w-full items-center overflow-y-auto bg-ink-soft px-6 md:px-12">
+      <div className="mx-auto w-full max-w-[1400px]">
         <div className="mb-10 flex items-center justify-between">
           <p className="text-[12px] uppercase tracking-widest2 text-muted">Events</p>
           <div className="flex gap-3">
@@ -52,7 +54,11 @@ export default function Events() {
             <h3 className="font-display text-3xl italic text-paper md:text-4xl">{event.title}</h3>
             <p className="mt-2 text-sm text-paper/50">{event.venue}</p>
             <a
-              href="#contact"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                goToId("collection");
+              }}
               className="mt-8 inline-block border-b border-accent-bright pb-1 text-[12px] uppercase tracking-widest2 text-paper/80 transition-colors hover:text-paper"
             >
               Read more

@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 import Placeholder from "./Placeholder";
 
 const SCATTER = [
-  { label: "It's You", className: "left-[4%] top-[18%] h-40 w-32 rotate-[-4deg]" },
-  { label: "Clouds and Trees", className: "left-[16%] top-[54%] h-32 w-40 rotate-[3deg]" },
-  { label: "Virgin Hodegetria", className: "left-[2%] top-[70%] h-28 w-24 rotate-[6deg]" },
-  { label: "Greek Stairs II", className: "right-[4%] top-[14%] h-36 w-28 rotate-[5deg]" },
-  { label: "Bridge in Putrajaya", className: "right-[14%] top-[46%] h-44 w-36 rotate-[-3deg]" },
-  { label: "The Gypsy Kiss", className: "right-[2%] top-[74%] h-28 w-24 rotate-[-6deg]" },
+  { label: "It's You", className: "left-[4%] top-[6%] h-[22rem] w-64 rotate-[-6deg] z-[3]" },
+  { label: "Clouds and Trees", className: "left-[15%] top-[26%] h-[30rem] w-80 rotate-[4deg] z-[2]" },
+  { label: "Virgin Hodegetria", className: "left-[6%] top-[64%] h-64 w-48 rotate-[7deg] z-[1]" },
+  { label: "Greek Stairs II", className: "right-[5%] top-[0%] h-72 w-56 rotate-[6deg] z-[3]" },
+  { label: "Bridge in Putrajaya", className: "right-[13%] top-[20%] h-[34rem] w-80 rotate-[-4deg] z-[2]" },
+  { label: "The Gypsy Kiss", className: "right-[7%] top-[58%] h-[21rem] w-52 rotate-[-7deg] z-[1]" },
 ];
 
 export default function Hero() {
   return (
-    <section id="home" className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-ink px-6">
+    <section className="relative flex h-full w-full flex-col justify-center overflow-hidden bg-ink px-6">
       <div className="pointer-events-none absolute inset-0 hidden md:block">
         {SCATTER.map((art, i) => (
           <motion.div
@@ -56,16 +56,6 @@ export default function Hero() {
           cannot and would not pick out any single one as a favorite.
         </motion.p>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3"
-      >
-        <span className="text-[11px] uppercase tracking-widest2 text-muted">Please Scroll</span>
-        <span className="h-10 w-px animate-pulse bg-paper/30" />
-      </motion.div>
     </section>
   );
 }
