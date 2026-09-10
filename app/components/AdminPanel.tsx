@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, supabaseConfigured } from "../lib/supabase";
-import { apiPath } from "../lib/basePath";
+import { apiPath, BASE_PATH } from "../lib/basePath";
 
 type AdminMessage = {
   id: string;
@@ -170,7 +170,7 @@ function LoginForm() {
         {error && <p className="text-xs text-accent">{error}</p>}
 
         <a
-          href="/"
+          href={`${BASE_PATH}/`}
           className="mt-2 text-[11px] uppercase tracking-widest2 text-muted transition-colors duration-300 hover:text-accent"
         >
           &larr; Back to the invitation
@@ -318,7 +318,7 @@ function ModerationPanel({ session }: { session: Session }) {
               Sign out
             </button>
             <a
-              href="/"
+              href={`${BASE_PATH}/`}
               className="text-[11px] uppercase tracking-widest2 text-muted transition-colors duration-300 hover:text-accent"
             >
               View invitation
