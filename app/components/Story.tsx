@@ -8,7 +8,7 @@ import { STORY_IMAGES, blurProps } from "../lib/images";
 //
 // Each label names the setting its photograph was taken in — the one thing
 // the picture actually tells us. Nothing here asserts anything about
-// Leisther and Christine's history, because we don't know it. When they send
+// Leisther and Cristine's history, because we don't know it. When they send
 // their own words, add a `caption` and render it; don't invent one.
 // One entry per frame, in strip order, paired positionally with
 // STORY_IMAGES in lib/images.ts. Swap the photograph there; put the

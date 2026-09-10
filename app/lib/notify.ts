@@ -66,7 +66,7 @@ function template({
 
   return `<div style="margin:0;padding:32px 20px;background:#EDE6E1;font-family:Georgia,'Times New Roman',serif;">
   <div style="max-width:560px;margin:0 auto;background:#F7F4F1;padding:36px 32px;">
-    <p style="margin:0;color:#7A1F2B;font-size:11px;letter-spacing:.28em;text-transform:uppercase;">Leisther &amp; Christine</p>
+    <p style="margin:0;color:#7A1F2B;font-size:11px;letter-spacing:.28em;text-transform:uppercase;">Leisther &amp; Cristine</p>
     <h1 style="margin:18px 0 26px;color:#151212;font-size:24px;font-weight:400;font-style:italic;line-height:1.3;">${escapeHtml(headline)}</h1>
     <table style="border-collapse:collapse;width:100%;">${rowHtml}</table>
     ${bodyHtml}

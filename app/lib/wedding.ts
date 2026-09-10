@@ -2,7 +2,7 @@
 // Change it here and it changes everywhere — hero, countdown, venues, metadata.
 
 export const COUPLE = {
-  bride: { first: "Christine", last: "Cogtong" },
+  bride: { first: "Cristine", last: "Cogtong" },
   groom: { first: "Leisther", last: "Cambial" },
 } as const;
 

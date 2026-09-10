@@ -2,7 +2,7 @@
 
 # Cambial – Cogtong Wedding
 
-Wedding invitation site for **Leisther Cambial & Christine Cogtong**,
+Wedding invitation site for **Leisther Cambial & Cristine Cogtong**,
 10 October 2026, Tagum City, Davao del Norte.
 
 - **Repo:** https://github.com/tsujintsujin/CambialWedding
@@ -130,7 +130,7 @@ Chapters: `orchard · road · villa · summit · firelight · burgundy · highla
 
 An earlier pass invented a relationship narrative — a seven-year story, a
 lakeside proposal, captions about what they were thinking. None of it came
-from Leisther or Christine. It has been removed. **Do not put it back.**
+from Leisther or Cristine. It has been removed. **Do not put it back.**
 
 - **`Story.tsx`** carries labels only — "The orchard", "The open road" — each
   naming the setting its photograph was taken in, the one thing the picture
@@ -145,7 +145,7 @@ from Leisther or Christine. It has been removed. **Do not put it back.**
   the Countdown's day-of message, and the Footer sign-off.
 - **`Rsvp.tsx`** copy is functional, not personal, and deliberately so: the
   heading addresses the guest in the third person ("Reply to Leisther &
-  Christine") the way the guestbook does, rather than speaking as the couple.
+  Cristine") the way the guestbook does, rather than speaking as the couple.
   The instruction line and the two confirmation lines still want sign-off. No
   deadline is shown — Justin confirmed on 2026-09-09 there isn't one yet, and
   a reply-by date is exactly the kind of thing guests act on, so don't invent
@@ -194,9 +194,9 @@ notes.
 
 ---
 
-## Deployed at wedd.space/leistherchristine
+## Deployed at wedd.space/leisthercristine
 
-Live at <https://wedd.space/leistherchristine> (the apex 301s to `www`).
+Live at <https://wedd.space/leisthercristine> (the apex 301s to `www`).
 Two deployments cooperate, and both must be redeployed for a routing change:
 
 | | |
@@ -204,7 +204,7 @@ Two deployments cooperate, and both must be redeployed for a routing change:
 | This app | Vercel project `cambial-wedding`, **git-connected** — a push to `master` deploys it |
 | wedd.space | Vercel project `wedd.space` (internally `wedd.pace`), repo `tsujintsujin/wedd-space` |
 
-`next.config.ts` sets `basePath: "/leistherchristine"`, and the wedd.space app
+`next.config.ts` sets `basePath: "/leisthercristine"`, and the wedd.space app
 proxies that path here with a `beforeFiles` rewrite. `beforeFiles` is load
 bearing: wedd.space's public `[slug]` route would otherwise claim the path and
 404, since no published `sites` row backs it. The slug is also in that app's
