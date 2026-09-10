@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Reveal from "./Reveal";
 import SectionLabel from "./SectionLabel";
 import { supabase, supabaseConfigured } from "../lib/supabase";
+import { apiPath } from "../lib/basePath";
 import { COUPLE } from "../lib/wedding";
 
 const NOTE_MAX_LENGTH = 200;
@@ -33,7 +34,7 @@ export default function Rsvp() {
     // Posted to the server rather than inserted from here, so the couple can
     // be emailed on submit without the Resend key reaching the browser.
     try {
-      const res = await fetch("/api/rsvp", {
+      const res = await fetch(apiPath("/api/rsvp"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, supabaseConfigured } from "../lib/supabase";
+import { apiPath } from "../lib/basePath";
 
 type AdminMessage = {
   id: string;
@@ -196,7 +197,7 @@ function ModerationPanel({ session }: { session: Session }) {
   const fetchMessages = useCallback(async () => {
     setLoadError(null);
     try {
-      const res = await fetch("/api/admin/messages", {
+      const res = await fetch(apiPath("/api/admin/messages"), {
         headers: { Authorization: `Bearer ${token}` },
       });
       const body = await res.json();
@@ -212,7 +213,7 @@ function ModerationPanel({ session }: { session: Session }) {
   const fetchRsvps = useCallback(async () => {
     setRsvpError(null);
     try {
-      const res = await fetch("/api/admin/rsvps", {
+      const res = await fetch(apiPath("/api/admin/rsvps"), {
         headers: { Authorization: `Bearer ${token}` },
       });
       const body = await res.json();
@@ -234,7 +235,7 @@ function ModerationPanel({ session }: { session: Session }) {
     setBusyId(id);
     setActionError(null);
     try {
-      const res = await fetch("/api/admin/messages", {
+      const res = await fetch(apiPath("/api/admin/messages"), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -279,7 +280,7 @@ function ModerationPanel({ session }: { session: Session }) {
     setBusyId(id);
     setActionError(null);
     try {
-      const res = await fetch(`/api/admin/rsvps?id=${encodeURIComponent(id)}`, {
+      const res = await fetch(apiPath(`/api/admin/rsvps?id=${encodeURIComponent(id)}`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

@@ -5,6 +5,7 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import Reveal from "./Reveal";
 import SectionLabel from "./SectionLabel";
 import { supabase, supabaseConfigured } from "../lib/supabase";
+import { apiPath } from "../lib/basePath";
 import { COUPLE } from "../lib/wedding";
 
 type GuestMessage = {
@@ -250,7 +251,7 @@ export default function Guestbook() {
     // Posted to the server rather than inserted from here, so the couple can
     // be emailed on submit without the Resend key reaching the browser.
     try {
-      const res = await fetch("/api/guestbook", {
+      const res = await fetch(apiPath("/api/guestbook"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name.trim(), message: message.trim() }),
