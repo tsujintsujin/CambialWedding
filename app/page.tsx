@@ -1,29 +1,29 @@
-import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Events from "./components/Events";
-import Articles from "./components/Articles";
-import FeaturedArtwork from "./components/FeaturedArtwork";
-import About from "./components/About";
-import CollectionCTA from "./components/CollectionCTA";
-import { SectionNavProvider } from "./components/SectionNavContext";
-import ScrollLockSections from "./components/ScrollLockSections";
-
-const IDS = ["home", "blog", "articles", "artists", "about", "collection"];
+import Countdown from "./components/Countdown";
+import Venues from "./components/Venues";
+import Story from "./components/Story";
+import Motif from "./components/Motif";
+import Rsvp from "./components/Rsvp";
+import Guestbook from "./components/Guestbook";
+import Details from "./components/Details";
+import Gallery from "./components/Gallery";
+import { galleryImages } from "./lib/galleryFiles";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <SectionNavProvider ids={IDS}>
-      <Header />
-      <ScrollLockSections
-        sections={[
-          <Hero key="home" />,
-          <Events key="blog" />,
-          <Articles key="articles" />,
-          <FeaturedArtwork key="artists" />,
-          <About key="about" />,
-          <CollectionCTA key="collection" />,
-        ]}
-      />
-    </SectionNavProvider>
+    <>
+      <main>
+        <Hero />
+        <Countdown />
+        <Venues />
+        <Motif />
+        <Rsvp />
+        <Guestbook />
+        <Details />
+        <Gallery images={galleryImages()} />
+      </main>
+      <Footer />
+    </>
   );
 }
