@@ -1,4 +1,5 @@
 import { COUPLE, DATE_SHORT, NAV_LINKS } from "../lib/wedding";
+import { BASE_PATH } from "../lib/basePath";
 
 export default function Footer() {
   return (
@@ -36,7 +37,10 @@ export default function Footer() {
             With love and gratitude, from both our families.
           </p>
           <a
-            href="/admin"
+            // A plain anchor, so basePath does not reach it the way it
+            // reaches next/link. Without the prefix this leaves the site and
+            // lands on wedd.space/admin, which 404s.
+            href={`${BASE_PATH}/admin`}
             className="text-[10px] uppercase tracking-widest2 text-ivory/20 transition-colors duration-300 hover:text-ivory/60"
           >
             Admin
