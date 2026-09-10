@@ -194,8 +194,43 @@ notes.
 
 ---
 
+## Deployed at wedd.space/leistherchristine
+
+Live at <https://wedd.space/leistherchristine> (the apex 301s to `www`).
+Two deployments cooperate, and both must be redeployed for a routing change:
+
+| | |
+|---|---|
+| This app | Vercel project `cambial-wedding`, **git-connected** — a push to `master` deploys it |
+| wedd.space | Vercel project `wedd.space` (internally `wedd.pace`), repo `tsujintsujin/wedd-space` |
+
+`next.config.ts` sets `basePath: "/leistherchristine"`, and the wedd.space app
+proxies that path here with a `beforeFiles` rewrite. `beforeFiles` is load
+bearing: wedd.space's public `[slug]` route would otherwise claim the path and
+404, since no published `sites` row backs it. The slug is also in that app's
+`RESERVED_SLUGS` so the publish flow can never mint a colliding site.
+
+**The wedd.space project is not git-connected.** Its production deployments are
+CLI deploys (`vercel --prod`), so pushing `wedd-space` master does *not* ship
+it. Note also that its working copy sits on `test_server`, ahead of the
+deployed `master` — deploy from a clean `master` worktree, never from that
+dirty tree, or undeployed product work ships with your change.
+
+**`basePath` does not reach `fetch`.** `next/link` and `next/image` prefix it
+themselves; `window.fetch` does not. A bare `fetch("/api/rsvp")` leaves this
+app and hits the wedd.space app instead, silently posting guest data to the
+wrong origin. Every same-origin fetch goes through `apiPath()` in
+[`app/lib/basePath.ts`](app/lib/basePath.ts). Keep it that way.
+
 **Status:** Built and verified locally — desktop, and a true 375x812 render.
-Not yet deployed, not yet committed.
+Deployed and verified live: pages, images, the `next/image` optimiser and the
+API routes all resolve through the proxy.
+
+**Outstanding:** the `cambial-wedding` Vercel project has no Supabase
+environment variables, so RSVP and the guestbook render their "not connected
+yet" placeholder copy to guests, and `/admin` cannot sign anyone in. Set the
+vars from `.env.local.example` in the Vercel dashboard and redeploy. Do not
+share the site with guests before that.
 
 *Mobile testing note:* the attached Chrome window gets stuck maximised and
 ignores `resize_window`, and `F12` / `Ctrl+Shift+M` don't reach browser chrome
