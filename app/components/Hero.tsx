@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { HERO_BACKDROP, HERO_COLLAGE, blurProps } from "../lib/images";
 import { COUPLE, DATE_SHORT } from "../lib/wedding";
+import { assetPath } from "../lib/basePath";
 
 // The template's scattered collage — same six positions, rotations and
 // z-indexes. The photographs live in lib/images.ts as HERO_COLLAGE; these
@@ -44,7 +45,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
       >
         <Image
-          src={BACKDROP.src}
+          src={assetPath(BACKDROP.src)}
           alt={BACKDROP.alt}
           fill
           priority
@@ -68,7 +69,7 @@ export default function Hero() {
             className={`pointer-events-auto absolute overflow-hidden shadow-2xl shadow-black/15 ${item.className}`}
           >
             <Image
-              src={item.photo.src}
+              src={assetPath(item.photo.src)}
               alt={item.photo.alt}
               fill
               priority

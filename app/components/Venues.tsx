@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { VENUE_IMAGES, blurProps } from "../lib/images";
 import { VENUES } from "../lib/wedding";
+import { assetPath } from "../lib/basePath";
 
 // Order matches VENUES: the parish, then the auditorium.
 const CARD_IMAGES = VENUE_IMAGES;
@@ -21,7 +22,7 @@ export default function Venues() {
             <div key={venue.kind}>
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper">
                 <Image
-                  src={CARD_IMAGES[i]!.src}
+                  src={assetPath(CARD_IMAGES[i]!.src)}
                   alt={CARD_IMAGES[i]!.alt || venue.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

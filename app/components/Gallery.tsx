@@ -12,6 +12,7 @@ import {
   blurProps,
   type SiteImage,
 } from "../lib/images";
+import { assetPath } from "../lib/basePath";
 
 /** The phone-only crop for one slide, keyed by filename. Everything not
  *  listed keeps the default top-anchored crop. */
@@ -29,7 +30,7 @@ function desktopFraming(photo: SiteImage) {
 function Frame({ photo, priority }: { photo: SiteImage; priority?: boolean }) {
   return (
     <Image
-      src={photo.src}
+      src={assetPath(photo.src)}
       alt={photo.alt}
       fill
       sizes="100vw"
