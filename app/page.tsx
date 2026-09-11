@@ -9,6 +9,7 @@ import Details from "./components/Details";
 import Gallery from "./components/Gallery";
 import { galleryImages } from "./lib/galleryFiles";
 import Footer from "./components/Footer";
+import Music from "./components/Music";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Gallery images={galleryImages()} />
       </main>
       <Footer />
+      <Music />
     </>
   );
 }

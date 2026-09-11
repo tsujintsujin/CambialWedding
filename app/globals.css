@@ -46,3 +46,53 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Falling rose petals over the Hero backdrop — the GSAP pen Justin supplied,
+   as CSS. Same numbers: 18 petals in three groups, 35x35, z-depth -200..200
+   under a 600px perspective, a 6-15s linear fall, and a 4-8s yoyo that drifts
+   100px sideways while tumbling 0-180deg. Transform-only, so it composites.
+   The per-petal z is a custom property because keyframes are shared. */
+@keyframes petal-fall {
+  from {
+    transform: translate3d(0, -200px, var(--petal-z));
+  }
+  to {
+    transform: translate3d(0, calc(100vh + 100px), var(--petal-z));
+  }
+}
+
+@keyframes petal-sway {
+  from {
+    transform: translate(-50%, -50%) translateX(0) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) translateX(100px) rotate(var(--petal-spin));
+  }
+}
+
+.petal-field {
+  perspective: 600px;
+}
+
+/* The image itself is set inline by Petals in Hero.tsx, through assetPath() —
+   basePath does not reach a CSS url(), and the stylesheet is not served from
+   the site root, so a relative path would not resolve either. */
+.petal {
+  opacity: 0.8;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
