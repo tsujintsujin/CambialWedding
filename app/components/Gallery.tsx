@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import {
   GALLERY_IMAGES,
   GALLERY_MOBILE_EXCLUDE,
+  GALLERY_DESKTOP_FRAMING,
   GALLERY_MOBILE_FRAMING,
   blurProps,
   type SiteImage,
@@ -18,6 +19,12 @@ function mobileFraming(photo: SiteImage) {
   return GALLERY_MOBILE_FRAMING[name] ?? "object-top";
 }
 
+/** The crop from 768px up, which overrides the phone one above. */
+function desktopFraming(photo: SiteImage) {
+  const name = photo.src.split("/").pop() ?? "";
+  return GALLERY_DESKTOP_FRAMING[name] ?? "md:object-top";
+}
+
 function Frame({ photo, priority }: { photo: SiteImage; priority?: boolean }) {
   return (
     <Image
@@ -27,7 +34,7 @@ function Frame({ photo, priority }: { photo: SiteImage; priority?: boolean }) {
       sizes="100vw"
       {...blurProps(photo)}
       {...(priority ? { priority: true } : { loading: "eager" as const })}
-      className={`object-cover ${mobileFraming(photo)} md:object-top`}
+      className={`object-cover ${mobileFraming(photo)} ${desktopFraming(photo)}`}
     />
   );
 }

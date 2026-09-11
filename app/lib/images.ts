@@ -205,6 +205,16 @@ export const GALLERY_MOBILE_FRAMING: Record<string, string> = {
   "gallery-24.jpg": "object-[60%_top]", // left
 };
 
+/** The same idea for the wide frame, where the default `md:object-top` can
+ *  cut a subject standing in the middle of a tall photograph. The value is
+ *  the vertical crop: `top` is the default, and a HIGHER number slides the
+ *  photo up (showing more of its lower half), with `center` = 50%. */
+export const GALLERY_DESKTOP_FRAMING: Record<string, string> = {
+  "gallery-09.jpg": "md:object-center", // up — couple mid-frame
+  "gallery-11.jpg": "md:object-center", // up — couple mid-frame
+  "gallery-19.jpg": "md:object-center", // up — couple mid-frame
+};
+
 export const GALLERY_IMAGES: SiteImage[] = [
   {
     // Slide 1 of 15. Reposition with the class below.
