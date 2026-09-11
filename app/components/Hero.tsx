@@ -197,8 +197,8 @@ function Petals() {
           <div
             className="petal will-change-transform"
             style={{
-              width: p.size,
-              height: p.size,
+              // Read by .petal, which halves it under 768px.
+              ["--petal-size" as string]: `${p.size}px`,
               ["--petal-spin" as string]: `${p.spin}deg`,
               backgroundImage: `url(${assetPath("/petal.png")})`,
               animation: `petal-sway ${p.sway}s ease-in-out -5s infinite alternate`,

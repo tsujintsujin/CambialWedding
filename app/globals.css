@@ -78,9 +78,22 @@ body {
    basePath does not reach a CSS url(), and the stylesheet is not served from
    the site root, so a relative path would not resolve either. */
 .petal {
+  width: var(--petal-size);
+  height: var(--petal-size);
   opacity: 0.8;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+/* The size is randomised per petal in Hero.tsx and arrives as a custom
+   property, because an inline width cannot be media-queried. At phone widths
+   the same petals read as far too big against a narrow viewport, so halve
+   them. The z-depth scaling still applies on top of this. */
+@media (max-width: 767px) {
+  .petal {
+    width: calc(var(--petal-size) / 2);
+    height: calc(var(--petal-size) / 2);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
