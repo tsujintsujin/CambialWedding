@@ -91,6 +91,10 @@ export default function Hero() {
           We&apos;re getting married
         </motion.p>
         <motion.h1
+          // The hydration watchdog in layout.tsx watches this element. It
+          // animates on mount rather than on scroll, so if it is still
+          // transparent seconds after load, the bundle never ran.
+          data-hydration-probe
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
