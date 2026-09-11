@@ -188,6 +188,12 @@ export const GALLERY_MOBILE_EXCLUDE: string[] = [
   "gallery-21.jpg",
 ];
 
+/** Slides to drop from 768px up — the mirror of GALLERY_MOBILE_EXCLUDE, for
+ *  photographs that only work in a portrait crop. Bare filenames. */
+export const GALLERY_DESKTOP_EXCLUDE: string[] = [
+  "gallery-14.jpg",
+];
+
 /** Per-photo framing on phones only — above 768px every slide goes back to
  *  `object-top`. The value is the horizontal crop: 50% is centred, and
  *  because the photo is wider than the frame, a HIGHER number slides the
@@ -210,9 +216,10 @@ export const GALLERY_MOBILE_FRAMING: Record<string, string> = {
  *  the vertical crop: `top` is the default, and a HIGHER number slides the
  *  photo up (showing more of its lower half), with `center` = 50%. */
 export const GALLERY_DESKTOP_FRAMING: Record<string, string> = {
-  "gallery-09.jpg": "md:object-center", // up — couple mid-frame
-  "gallery-11.jpg": "md:object-center", // up — couple mid-frame
-  "gallery-19.jpg": "md:object-center", // up — couple mid-frame
+  "gallery-09.jpg": "md:object-[center_15%]", // down a little
+  "gallery-10.jpg": "md:object-top", // pinned to the top edge — lowering clips the head
+  "gallery-11.jpg": "md:object-[center_25%]", // up a little
+  "gallery-19.jpg": "md:object-[center_42%]", // up
 };
 
 export const GALLERY_IMAGES: SiteImage[] = [

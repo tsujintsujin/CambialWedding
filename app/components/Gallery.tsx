@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import {
   GALLERY_IMAGES,
   GALLERY_MOBILE_EXCLUDE,
+  GALLERY_DESKTOP_EXCLUDE,
   GALLERY_DESKTOP_FRAMING,
   GALLERY_MOBILE_FRAMING,
   blurProps,
@@ -59,16 +60,12 @@ export default function Gallery({
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  const SLIDES = useMemo(
-    () =>
-      isPhone
-        ? images.filter(
-            (photo) =>
-              !GALLERY_MOBILE_EXCLUDE.some((name) => photo.src.endsWith(name))
-          )
-        : images,
-    [images, isPhone]
-  );
+  const SLIDES = useMemo(() => {
+    const dropped = isPhone ? GALLERY_MOBILE_EXCLUDE : GALLERY_DESKTOP_EXCLUDE;
+    return images.filter(
+      (photo) => !dropped.some((name) => photo.src.endsWith(name))
+    );
+  }, [images, isPhone]);
   const COUNT = SLIDES.length;
 
   const [index, setIndex] = useState(0);
@@ -132,11 +129,6 @@ export default function Gallery({
       id="gallery"
       className="relative min-h-screen w-full overflow-hidden bg-paper"
     >
-      <div className="pointer-events-none absolute left-6 top-8 z-30 md:left-10 md:top-10">
-        <p className="text-[12px] uppercase tracking-widest2 text-paper drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
-          Gallery
-        </p>
-      </div>
 
       {neighbours.map((i) => (
         <div key={SLIDES[i]!.src} className="absolute inset-0 z-0">
