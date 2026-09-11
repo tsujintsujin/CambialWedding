@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Stage test</title>
+<style>
+ body{margin:0;font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background:#F7EFE6;color:#641428;padding:22px}
+ h1{font-size:20px;margin:0 0 14px}
+ li{padding:8px 4px;border-bottom:1px solid #D8A98B;list-style:none}
+ ul{margin:0;padding:0}
+ .p{color:#B55B4C}.o{color:#1a7f37;font-weight:600}.f{color:#b00020;font-weight:700}
+ #s{background:#641428;color:#F7EFE6;padding:13px;border-radius:6px;text-align:center;
+    font-weight:700;margin-bottom:16px}
+ #e{background:#b00020;color:#fff;padding:11px;border-radius:6px;margin-top:14px;
+    font-size:12px;word-break:break-word;display:none}
+</style>
+</head>
+<body>
+<div id="s">Running&hellip;</div>
+<h1>Stage test</h1>
+<p class="p">Let this finish, then screenshot the whole page. If it freezes or
+the error screen appears, screenshot whatever you last saw &mdash; the last
+green line is the answer.</p>
+<ul id="l"></ul>
+<div id="e"></div>
+<script>
+/* ES5. Loads the real invitation's resources one stage at a time so a crash
+   names its own culprit: the last line marked OK is the last thing that
+   survived. */
+(function(){
+ var B="/leisthercristine", L=document.getElementById('l'),
+     S=document.getElementById('s'), E=document.getElementById('e');
+ window.onerror=function(m,u,l){E.style.display='block';
+   E.textContent='JS error: '+m+' @ '+(u||'?')+':'+(l||'?');return false;};
+ function row(t){var li=document.createElement('li');
+   li.innerHTML='<span class="p">'+t+'</span> &hellip;';L.appendChild(li);return li;}
+ function mark(li,ok,ms,extra){
+   li.innerHTML='<span class="'+(ok?'o':'f')+'">'+(ok?'OK':'FAILED')+'</span> '+
+     li.getAttribute('data-t')+(ok?' <span class="p">('+ms+' ms'+(extra||'')+')</span>':'');}
+ var stages=[
+  ['CSS stylesheet', function(cb){var s=document.createElement('link');s.rel='stylesheet';
+     s.onload=function(){cb(true)};s.onerror=function(){cb(false)};
+     s.href=B+'/_next/static/immutable/chunks/'+window.__CSS__;document.head.appendChild(s);}],
+  ['Hero photograph', function(cb){var i=new Image();i.onload=function(){cb(true,i.naturalWidth+'x'+i.naturalHeight)};
+     i.onerror=function(){cb(false)};
+     i.src=B+'/_next/image?url=%2Fleisthercristine%2Fimages%2Fhero%2Fhero-backdrop.jpg&w=1200&q=75';}],
+  ['Three gallery photographs', function(cb){var n=0,bad=0,names=['gallery-01','gallery-02','gallery-24'];
+     for(var k=0;k<3;k++){(function(nm){var i=new Image();
+       i.onload=function(){n++;if(n+bad===3)cb(bad===0)};
+       i.onerror=function(){bad++;if(n+bad===3)cb(false)};
+       i.src=B+'/_next/image?url=%2Fleisthercristine%2Fimages%2Fgallery%2F'+nm+'.jpg&w=1200&q=75';})(names[k]);}}],
+  ['Fetch the invitation HTML', function(cb){try{var x=new XMLHttpRequest();
+     x.open('GET',B,true);x.onload=function(){cb(x.status===200,' '+Math.round(x.responseText.length/1024)+' KB')};
+     x.onerror=function(){cb(false)};x.send();}catch(e){cb(false)}}]
+ ];
+ /* discover the real css filename from the invitation HTML first */
+ var x0=new XMLHttpRequest();
+ x0.open('GET',B,true);
+ x0.onload=function(){
+   var m=x0.responseText.match(/chunks\/([A-Za-z0-9_-]+\.css)/);
+   window.__CSS__=m?m[1]:'';
+   run(0);
+ };
+ x0.onerror=function(){window.__CSS__='';run(0);};
+ x0.send();
+ function run(i){
+   if(i>=stages.length){S.textContent='All stages passed';S.style.background='#1a7f37';return;}
+   var li=row(stages[i][0]); li.setAttribute('data-t',stages[i][0]);
+   var t0=new Date().getTime(), done=false;
+   var to=setTimeout(function(){if(!done){done=true;mark(li,false,0);run(i+1);}},20000);
+   stages[i][1](function(ok,extra){
+     if(done)return; done=true; clearTimeout(to);
+     mark(li,ok,new Date().getTime()-t0,extra?' , '+extra:'');
+     run(i+1);
+   });
+ }
+})();
+</script>
+</body>
+</html>
