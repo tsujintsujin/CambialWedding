@@ -53,8 +53,40 @@ green line is the answer.</p>
        i.onerror=function(){bad++;if(n+bad===3)cb(false)};
        i.src=B+'/_next/image?url=%2Fleisthercristine%2Fimages%2Fgallery%2F'+nm+'.jpg&w=1200&q=75';})(names[k]);}}],
   ['Fetch the invitation HTML', function(cb){try{var x=new XMLHttpRequest();
-     x.open('GET',B,true);x.onload=function(){cb(x.status===200,' '+Math.round(x.responseText.length/1024)+' KB')};
-     x.onerror=function(){cb(false)};x.send();}catch(e){cb(false)}}]
+     x.open('GET',B,true);x.onload=function(){window.__HTML__=x.responseText;
+       cb(x.status===200,' '+Math.round(x.responseText.length/1024)+' KB')};
+     x.onerror=function(){cb(false)};x.send();}catch(e){cb(false)}}],
+  /* Render seven full-bleed layers, the way the real page stacks them. This is
+     the compositing/memory load, separate from merely downloading the files. */
+  ['Render 7 full-bleed photo layers', function(cb){
+     var names=['hero/hero-backdrop','venues/venue-ceremony','venues/venue-reception',
+                'motif/motif-feature','gallery/gallery-01','gallery/gallery-02','gallery/gallery-24'];
+     var box=document.createElement('div');
+     box.style.cssText='position:relative;height:60px;overflow:hidden';
+     document.body.appendChild(box);
+     var n=0;
+     for(var k=0;k<names.length;k++){
+       var im=document.createElement('img');
+       im.style.cssText='position:absolute;top:0;left:0;width:100%;height:100vh;object-fit:cover';
+       im.onload=im.onerror=function(){n++;if(n===names.length)setTimeout(function(){cb(true)},600)};
+       im.src=B+'/_next/image?url=%2Fleisthercristine%2Fimages%2F'+names[k]+'.jpg&w=1200&q=75';
+       box.appendChild(im);
+     }}],
+  /* The last untested thing: actually executing the page's JavaScript. */
+  ['Run the invitation JavaScript', function(cb){
+     var h=window.__HTML__||'', re=/src="(\/leisthercristine\/_next\/[^"]+\.js)"/g, m, urls=[];
+     while((m=re.exec(h))!==null){ urls.push(m[1].replace(/&amp;/g,'&')); }
+     if(!urls.length){ cb(false,' no chunks found'); return; }
+     var i=0, loaded=0;
+     (function next(){
+       if(i>=urls.length){ cb(true,' '+loaded+'/'+urls.length+' chunks'); return; }
+       var sc=document.createElement('script');
+       sc.src=urls[i++]; sc.async=false;
+       sc.onload=function(){loaded++;next();};
+       sc.onerror=function(){next();};
+       document.body.appendChild(sc);
+     })();
+   }]
  ];
  /* discover the real css filename from the invitation HTML first */
  var x0=new XMLHttpRequest();
