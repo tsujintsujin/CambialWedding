@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Connection test</title>
+<style>
+  body{margin:0;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       background:#F7EFE6;color:#641428;padding:28px}
+  h1{font-size:22px;margin:0 0 4px}
+  p{margin:0 0 18px;color:#8C2B3A}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  td{padding:7px 6px;border-bottom:1px solid #D8A98B;vertical-align:top;word-break:break-word}
+  td:first-child{color:#B55B4C;white-space:nowrap;width:38%}
+  .ok{background:#641428;color:#F7EFE6;padding:12px;border-radius:6px;text-align:center;
+      font-weight:600;margin-bottom:20px}
+</style>
+</head>
+<body>
+  <div class="ok">This page loaded successfully</div>
+  <h1>Connection test</h1>
+  <p>Please screenshot this whole page and send it back.</p>
+  <table id="t">
+    <tr><td>Page</td><td>ping.html (no images, no framework)</td></tr>
+  </table>
+<script>
+/* ES5 on purpose: this has to run on browsers the main site may not. */
+(function(){
+  var rows=[
+    ['iOS / browser', navigator.userAgent],
+    ['Screen', screen.width+' x '+screen.height+' @'+(window.devicePixelRatio||1)+'x'],
+    ['Viewport', window.innerWidth+' x '+window.innerHeight],
+    ['Device memory', (navigator.deviceMemory||'not reported')+' GB'],
+    ['Connection', (navigator.connection&&navigator.connection.effectiveType)||'not reported'],
+    ['Language', navigator.language],
+    ['Loaded at', new Date().toString()],
+    ['URL', location.href]
+  ];
+  var t=document.getElementById('t'),html='';
+  for(var i=0;i<rows.length;i++){
+    html+='<tr><td>'+rows[i][0]+'</td><td>'+String(rows[i][1])+'</td></tr>';
+  }
+  t.innerHTML+=html;
+})();
+</script>
+</body>
+</html>
