@@ -27,7 +27,18 @@ function desktopFraming(photo: SiteImage) {
   return GALLERY_DESKTOP_FRAMING[name] ?? "md:object-top";
 }
 
-function Frame({ photo, priority }: { photo: SiteImage; priority?: boolean }) {
+// Every frame is lazy, and none is priority. The gallery is the LAST section
+// on the page, so nothing here is ever on screen at first paint — but three
+// of these mount at once (current plus both neighbours) and each decodes to
+// roughly 9 MB at the 1920px variant a 3x phone picks for a full-bleed box.
+// Loading them eagerly spent ~28 MB of bitmap memory on pictures nobody could
+// see yet, which is what pushed Messenger's in-app WebView over its limit and
+// produced "This page couldn't load" — iOS killing the web content process.
+//
+// Laziness costs nothing here: all three frames are `absolute inset-0` in the
+// same section, so scrolling the gallery into view brings every one of them
+// into range at the same moment. Stepping still lands on a decoded image.
+function Frame({ photo }: { photo: SiteImage }) {
   return (
     <Image
       src={assetPath(photo.src)}
@@ -35,7 +46,7 @@ function Frame({ photo, priority }: { photo: SiteImage; priority?: boolean }) {
       fill
       sizes="100vw"
       {...blurProps(photo)}
-      {...(priority ? { priority: true } : { loading: "eager" as const })}
+      loading="lazy"
       className={`object-cover ${mobileFraming(photo)} ${desktopFraming(photo)}`}
     />
   );
@@ -151,7 +162,7 @@ export default function Gallery({
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         onAnimationComplete={() => setUnder(null)}
       >
-        <Frame photo={SLIDES[index]!} priority={index === 0} />
+        <Frame photo={SLIDES[index]!} />
       </motion.div>
 
       <button
