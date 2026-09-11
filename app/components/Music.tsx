@@ -29,7 +29,21 @@ export default function Music() {
     if (!el) return;
     el.volume = VOLUME;
 
-    const events = ["pointerdown", "keydown", "touchstart", "scroll"] as const;
+    // Only these events grant user activation, which is what the autoplay
+    // policy actually gates on. `scroll` and `wheel` grant nothing, and
+    // neither does `touchstart` — on a phone the activation arrives at
+    // `touchend`, so listening to the start of the tap fails and costs the
+    // guest a second one. `pointerdown` counts for a mouse but not for touch,
+    // and `pointerup` is the reverse, so both are here.
+    // https://developer.mozilla.org/en-US/docs/Web/Security/User_activation
+    const events = [
+      "keydown",
+      "mousedown",
+      "pointerdown",
+      "pointerup",
+      "touchend",
+      "click",
+    ] as const;
     let onGesture: ((e: Event) => void) | null = null;
 
     const unlisten = () => {
@@ -47,6 +61,9 @@ export default function Music() {
           // playing and pauses it again, so the first press looks dead.
           const target = e.target as Element | null;
           if (target?.closest?.("[data-music-toggle]")) return;
+          // Activation is sticky, so the listeners stay armed until a play()
+          // actually resolves — an early event that grants nothing simply
+          // fails and the next one tries again.
           el.play().then(unlisten, () => {});
         };
         events.forEach((e) =>
