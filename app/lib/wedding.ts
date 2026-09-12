@@ -48,13 +48,12 @@ export const VENUES = [
   },
 ] as const;
 
-// The five tones from the couple's motif card, lightest use to darkest.
+// The four tones from the couple's motif card, lightest use to darkest.
 export const MOTIF = [
   { hex: "#641428", name: "Burgundy", role: "" },
   { hex: "#8C2B3A", name: "Wine", role: "" },
   { hex: "#B55B4C", name: "Terracotta", role: "" },
   { hex: "#D8A98B", name: "Sand", role: "" },
-  { hex: "#F7EFE6", name: "Ivory", role: "" },
 ] as const;
 
 export const NAV_LINKS = [

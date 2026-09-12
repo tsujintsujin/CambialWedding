@@ -16,12 +16,11 @@ export default function Motif() {
           <h2 className="mt-6 font-display text-3xl font-light leading-[1.15] text-ink md:text-[2.75rem]">
             Burgundy, warmed
             <br />
-            <em className="italic text-terracotta">all the way to ivory.</em>
+            <em className="italic text-terracotta">all the way to sand.</em>
           </h2>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-muted">
-            We would love for our guests to dress within these five tones. It
-            is a guide rather than a rule — wear the shade you feel best in,
-            and leave the ivory to the bride.
+            We would love for our guests to dress within these four tones. It
+            is a guide rather than a rule — wear the shade you feel best in.
           </p>
 
           <ul className="mt-10 divide-y divide-line-dark border-y border-line-dark">
