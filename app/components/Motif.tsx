@@ -10,7 +10,7 @@ const feature = MOTIF_IMAGE;
 export default function Motif() {
   return (
     <section id="motif" className="bg-paper px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto grid max-w-shell items-center gap-14 lg:grid-cols-12 lg:gap-16">
+      <div className="mx-auto grid max-w-shell grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
           <SectionLabel>Colour Motif</SectionLabel>
           <h2 className="mt-6 font-display text-3xl font-light leading-[1.15] text-ink md:text-[2.75rem]">

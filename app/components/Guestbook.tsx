@@ -122,7 +122,7 @@ function NoteCarousel({ messages }: { messages: GuestMessage[] }) {
 
   return (
     <div>
-      <div className="grid overflow-hidden">
+      <div className="grid grid-cols-1 overflow-hidden">
         {messages.map((m) => (
           <div
             key={`sizer-${m.id}`}
@@ -290,7 +290,7 @@ export default function Guestbook() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-4">
             {!supabaseConfigured ? (
               <p className="max-w-sm text-[15px] leading-relaxed text-muted">
