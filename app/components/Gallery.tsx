@@ -12,7 +12,6 @@ import {
   blurProps,
   type SiteImage,
 } from "../lib/images";
-import { assetPath } from "../lib/basePath";
 
 /** The phone-only crop for one slide, keyed by filename. Everything not
  *  listed keeps the default top-anchored crop. */
@@ -41,7 +40,7 @@ function desktopFraming(photo: SiteImage) {
 function Frame({ photo }: { photo: SiteImage }) {
   return (
     <Image
-      src={assetPath(photo.src)}
+      src={photo.src}
       alt={photo.alt}
       fill
       sizes="100vw"
@@ -52,9 +51,7 @@ function Frame({ photo }: { photo: SiteImage }) {
   );
 }
 
-// The slides come from the server, which lists public/images/gallery at
-// build time — see lib/galleryFiles.ts. GALLERY_IMAGES is only the fallback
-// for a render that doesn't pass them.
+// The slides are GALLERY_IMAGES in lib/images.ts unless a render passes others.
 export default function Gallery({
   images = GALLERY_IMAGES,
 }: {

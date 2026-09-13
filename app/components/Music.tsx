@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { assetPath } from "../lib/basePath";
+import { cloudinary } from "../lib/cloudinary";
 
 const START_DELAY = 1000;
 const VOLUME = 0.35;
@@ -97,7 +97,7 @@ export default function Music() {
     <>
       {/* preload="none" keeps 4 MB of audio from competing with the Hero
           photographs at first paint; play() fetches it when it is wanted. */}
-      <audio ref={ref} src={assetPath("/audio/music.mp3")} loop preload="none" />
+      <audio ref={ref} src={cloudinary("music.mp3", "", "video")} loop preload="none" />
       <button
         type="button"
         onClick={toggle}

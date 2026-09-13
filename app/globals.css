@@ -74,9 +74,7 @@ body {
   perspective: 600px;
 }
 
-/* The image itself is set inline by Petals in Hero.tsx, through assetPath() —
-   basePath does not reach a CSS url(), and the stylesheet is not served from
-   the site root, so a relative path would not resolve either. */
+/* The image itself is set inline by Petals in Hero.tsx, from Cloudinary. */
 .petal {
   width: var(--petal-size);
   height: var(--petal-size);

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { HERO_BACKDROP, HERO_COLLAGE, blurProps } from "../lib/images";
 import { COUPLE, DATE_SHORT } from "../lib/wedding";
-import { assetPath } from "../lib/basePath";
+import { cloudinary } from "../lib/cloudinary";
 
 // The template's scattered collage — same six positions, rotations and
 // z-indexes. The photographs live in lib/images.ts as HERO_COLLAGE; these
@@ -45,7 +45,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
       >
         <Image
-          src={assetPath(BACKDROP.src)}
+          src={BACKDROP.src}
           alt={BACKDROP.alt}
           fill
           priority
@@ -71,7 +71,7 @@ export default function Hero() {
             className={`pointer-events-auto absolute overflow-hidden shadow-2xl shadow-black/15 ${item.className}`}
           >
             <Image
-              src={assetPath(item.photo.src)}
+              src={item.photo.src}
               alt={item.photo.alt}
               fill
               priority
@@ -200,7 +200,7 @@ function Petals() {
               // Read by .petal, which halves it under 768px.
               ["--petal-size" as string]: `${p.size}px`,
               ["--petal-spin" as string]: `${p.spin}deg`,
-              backgroundImage: `url(${assetPath("/petal.png")})`,
+              backgroundImage: `url(${cloudinary("petal.png", "f_auto,q_auto")})`,
               animation: `petal-sway ${p.sway}s ease-in-out -5s infinite alternate`,
             }}
           />

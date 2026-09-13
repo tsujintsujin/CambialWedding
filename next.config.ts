@@ -12,6 +12,9 @@ const basePath = "/leisthercristine";
 const nextConfig: NextConfig = {
   basePath,
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
+  // All media is served by Cloudinary (lib/cloudinary.ts), which also does
+  // the resizing — nothing goes through Vercel's image optimiser.
+  images: { loader: "custom", loaderFile: "./app/lib/cloudinaryLoader.ts" },
 };
 
 export default nextConfig;

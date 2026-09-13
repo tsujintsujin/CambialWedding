@@ -3,7 +3,6 @@ import Reveal from "./Reveal";
 import SectionLabel from "./SectionLabel";
 import { MOTIF_IMAGE, blurProps } from "../lib/images";
 import { MOTIF } from "../lib/wedding";
-import { assetPath } from "../lib/basePath";
 
 const feature = MOTIF_IMAGE;
 
@@ -48,7 +47,7 @@ export default function Motif() {
         <Reveal delay={0.1} className="lg:col-span-7">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper-dim">
             <Image
-              src={assetPath(feature.src)}
+              src={feature.src}
               alt={feature.alt}
               fill
               sizes="(max-width: 768px) 100vw, 56vw"

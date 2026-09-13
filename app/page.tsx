@@ -7,7 +7,6 @@ import Rsvp from "./components/Rsvp";
 import Guestbook from "./components/Guestbook";
 import Details from "./components/Details";
 import Gallery from "./components/Gallery";
-import { galleryImages } from "./lib/galleryFiles";
 import Footer from "./components/Footer";
 import Music from "./components/Music";
 
@@ -22,7 +21,7 @@ export default function Home() {
         <Rsvp />
         <Guestbook />
         <Details />
-        <Gallery images={galleryImages()} />
+        <Gallery />
       </main>
       <Footer />
       <Music />
