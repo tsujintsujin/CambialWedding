@@ -15,6 +15,22 @@ const nextConfig: NextConfig = {
   // All media is served by Cloudinary (lib/cloudinary.ts), which also does
   // the resizing — nothing goes through Vercel's image optimiser.
   images: { loader: "custom", loaderFile: "./app/lib/cloudinaryLoader.ts" },
+  // The song is the one exception: it stays in Cloudinary, but guests fetch
+  // it from our own origin. <audio> is far more fragile cross-origin than
+  // <img> — a blocker, a privacy setting or a media-src rule kills playback
+  // outright and silently, and moving it off /public is what broke it. The
+  // rewrite keeps the 4 MB out of the deployment while restoring the
+  // same-origin URL the player had before. Rewrites are basePath-aware, so
+  // this matches /leisthercristine/audio/music.mp3.
+  async rewrites() {
+    return [
+      {
+        source: "/audio/music.mp3",
+        destination:
+          "https://res.cloudinary.com/dopunn7eb/video/upload/leisthercristine/music.mp3",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
