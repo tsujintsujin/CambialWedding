@@ -3,6 +3,7 @@ import Countdown from "./components/Countdown";
 import Venues from "./components/Venues";
 import Story from "./components/Story";
 import Motif from "./components/Motif";
+import Envelope from "./components/Envelope";
 import Rsvp from "./components/Rsvp";
 import Guestbook from "./components/Guestbook";
 import Details from "./components/Details";
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <Countdown />
         <Venues />
+        <Envelope />
         <Motif />
         <Rsvp />
         <Guestbook />

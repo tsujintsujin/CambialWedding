@@ -51,13 +51,24 @@ body {
    as CSS. Same numbers: 18 petals in three groups, 35x35, z-depth -200..200
    under a 600px perspective, a 6-15s linear fall, and a 4-8s yoyo that drifts
    100px sideways while tumbling 0-180deg. Transform-only, so it composites.
-   The per-petal z is a custom property because keyframes are shared. */
+   The per-petal z is a custom property because keyframes are shared.
+   Each petal fades out between 60% and 85% of its fall. 85% lands short of the
+   bottom edge at any viewport height (about 90px short on a 991px screen), so
+   no petal is ever seen dropping out of frame. Opacity still composites. */
 @keyframes petal-fall {
   from {
     transform: translate3d(0, -200px, var(--petal-z));
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
   }
   to {
     transform: translate3d(0, calc(100vh + 100px), var(--petal-z));
+    opacity: 0;
   }
 }
 
@@ -74,7 +85,7 @@ body {
   perspective: 600px;
 }
 
-/* The image itself is set inline by Petals in Hero.tsx, through assetPath() —
+/* The image itself is set inline by Petals.tsx, through assetPath() —
    basePath does not reach a CSS url(), and the stylesheet is not served from
    the site root, so a relative path would not resolve either. */
 .petal {
@@ -85,7 +96,7 @@ body {
   background-repeat: no-repeat;
 }
 
-/* The size is randomised per petal in Hero.tsx and arrives as a custom
+/* The size is randomised per petal in Petals.tsx and arrives as a custom
    property, because an inline width cannot be media-queried. At phone widths
    the same petals read as far too big against a narrow viewport, so halve
    them. The z-depth scaling still applies on top of this. */
