@@ -96,8 +96,15 @@ export default function Music() {
   return (
     <>
       {/* preload="none" keeps 4 MB of audio from competing with the Hero
-          photographs at first paint; play() fetches it when it is wanted. */}
-      <audio ref={ref} src={assetPath("/audio/music.mp3")} loop preload="none" />
+          photographs at first paint; play() fetches it when it is wanted.
+
+          The ?v= is a cache key, not a version of the file. wedd.space proxies
+          this path and its edge cached a partial (Range) response once, then
+          served that truncated body to everyone — playback died with a bare
+          "Format error". Redeploying this app cannot clear that, because the
+          cache belongs to the wedd.space project. Bump the number to walk away
+          from a poisoned key. */}
+      <audio ref={ref} src={assetPath("/audio/music.mp3?v=2")} loop preload="none" />
       <button
         type="button"
         onClick={toggle}
