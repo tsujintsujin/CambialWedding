@@ -222,11 +222,11 @@ wrong origin. Every same-origin fetch goes through `apiPath()` in
 Deployed and verified live: pages, images, the `next/image` optimiser and the
 API routes all resolve through the proxy.
 
-**Outstanding:** the `cambial-wedding` Vercel project has no Supabase
-environment variables, so RSVP and the guestbook render their "not connected
-yet" placeholder copy to guests, and `/admin` cannot sign anyone in. Set the
-vars from `.env.local.example` in the Vercel dashboard and redeploy. Do not
-share the site with guests before that.
+**Outstanding:** the Supabase env vars are now set on `cambial-wedding`
+(production serves the real RSVP form, not the "not connected yet" placeholder),
+but nobody has yet submitted an RSVP or a guestbook note through the live page
+and seen it land in Supabase and appear in `/admin`. Do that once before
+sharing the link with guests.
 
 *Mobile testing note:* the attached Chrome window gets stuck maximised and
 ignores `resize_window`, and `F12` / `Ctrl+Shift+M` don't reach browser chrome
