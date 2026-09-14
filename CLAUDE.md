@@ -103,7 +103,15 @@ deployment. Moved on 2026-09-14.
   ([`app/lib/cloudinaryLoader.ts`](app/lib/cloudinaryLoader.ts), wired in
   `next.config.ts`) that asks Cloudinary for `f_auto,q_auto,c_limit,w_<n>`.
   Vercel's image optimiser is not involved, and `src` gets no basePath.
-- The song is a `video` resource (`video/upload/leisthercristine/music.mp3`).
+- **The song is the one exception: it lives in `public/audio/music.mp3`, not
+  Cloudinary.** Serving it from Cloudinary silently killed playback, because
+  the wedd.space app sends a CSP with no `media-src`, so media falls back to
+  `default-src 'self'`. That CSP names `res.cloudinary.com` under `img-src`
+  and `connect-src` but not for media — which is why every photograph loaded
+  and `fetch()` of the mp3 worked while `<audio>` alone stayed dead. Proxying
+  it back through a Next rewrite is not a fix either: Vercel's edge caches the
+  proxied response without varying on `Range`, so one partial request pins a
+  truncated body for everyone. Keep it as a static file. 4 MB is the price.
 - The gallery is `gallery-01` … `gallery-24`, counted in `GALLERY_IMAGES` in
   `lib/images.ts`. It is no longer read off disk.
 - `leisthercristine/originals/` holds the 66 prenup exports that used to sit
