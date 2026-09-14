@@ -1,4 +1,4 @@
-import { assetPath } from "../lib/basePath";
+import { cloudinary } from "../lib/cloudinary";
 
 // The GSAP pen Justin supplied, as CSS. Three groups of six (the pen's `dot`,
 // `dot2`, `dot3`), offset from each other so they never fall in lockstep.
@@ -63,7 +63,7 @@ export default function Petals({ className }: { className: string }) {
               // Read by .petal, which halves it under 768px.
               ["--petal-size" as string]: `${p.size}px`,
               ["--petal-spin" as string]: `${p.spin}deg`,
-              backgroundImage: `url(${assetPath("/petal.png")})`,
+              backgroundImage: `url(${cloudinary("petal.png", "f_auto,q_auto")})`,
               animation: `petal-sway ${p.sway}s ease-in-out -5s infinite alternate`,
             }}
           />

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { STORY_IMAGES, blurProps } from "../lib/images";
-import { assetPath } from "../lib/basePath";
 
 // DO NOT WRITE COPY FOR THIS SECTION.
 //
@@ -89,7 +88,7 @@ export default function Story() {
               <div key={photo.src} className="w-64 flex-shrink-0 md:w-72">
                 <div className="pointer-events-none relative aspect-[3/4] w-full overflow-hidden bg-paper-dim">
                   <Image
-                    src={assetPath(photo.src)}
+                    src={photo.src}
                     alt={photo.alt || moment.label}
                     fill
                     sizes="(max-width: 768px) 70vw, 600px"

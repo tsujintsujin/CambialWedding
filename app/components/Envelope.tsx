@@ -15,12 +15,12 @@ import {
   SECONDARY_SPONSORS,
   VENUES,
 } from "../lib/wedding";
-import { assetPath } from "../lib/basePath";
+import { cloudinary } from "../lib/cloudinary";
 import Petals from "./Petals";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-// The decorated paper (public/entourage/paper.webp, 864x2016, generated) drawn
+// The decorated paper (Cloudinary entourage-paper.webp, 864x2016, generated) drawn
 // as a 9-slice. The top and bottom bands hold the flowers and keep their
 // proportions at any width; only the plain middle stretches to the card's
 // height. The left and right slices meet in the middle, so nothing is ever
@@ -28,7 +28,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const BACKDROP = {
   borderStyle: "solid",
   borderWidth: 0,
-  borderImageSource: `url(${assetPath("/entourage/paper.webp")})`,
+  borderImageSource: `url(${cloudinary("entourage-paper.webp", "f_auto,q_auto")})`,
   borderImageSlice: "524 432 565 432 fill",
   borderImageWidth: "calc(100cqw * 524 / 864) 50% calc(100cqw * 565 / 864) 50%",
 };

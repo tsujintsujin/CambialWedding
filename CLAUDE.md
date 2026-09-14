@@ -90,39 +90,38 @@ sections slotted in:
 
 ---
 
-## Photographs — export them from the *originals*
+## Media lives on Cloudinary, not in `public/`
 
-The set lives in a shared Google Drive folder. **Fetch at `sz=w4000`**, which
-returns the true originals (mostly 3504x2336). An earlier pass used
-`sz=w2400` — Drive's *downscaled* render — and then re-encoded that to 1800px
-q80. Two lossy passes off a soft intermediate, and the full-bleed gallery was
-upscaling 1800px into a 1905px box. The result looked visibly blurry. Don't
-repeat it.
+Every photograph, the petal and the song are in **Cloudinary** — cloud
+`dopunn7eb`, Media Library folder `leisthercristine` (the same account wedd.space
+uses). Nothing is in `public/` any more; that took ~130 MB out of the Vercel
+deployment. Moved on 2026-09-14.
 
-Current pipeline: Drive `w4000` -> 2400px q85 (subsampling 0) into
-`public/gallery/`, 2880px q86 into `public/hero/`. About 38.6 MB.
+- [`app/lib/cloudinary.ts`](app/lib/cloudinary.ts) builds the URLs. Files are
+  addressed by bare filename: `leisthercristine/gallery-01.jpg`.
+- `next/image` uses a custom loader
+  ([`app/lib/cloudinaryLoader.ts`](app/lib/cloudinaryLoader.ts), wired in
+  `next.config.ts`) that asks Cloudinary for `f_auto,q_auto,c_limit,w_<n>`.
+  Vercel's image optimiser is not involved, and `src` gets no basePath.
+- The song is a `video` resource (`video/upload/leisthercristine/music.mp3`).
+- The gallery is `gallery-01` … `gallery-24`, counted in `GALLERY_IMAGES` in
+  `lib/images.ts`. It is no longer read off disk.
+- `leisthercristine/originals/` holds the 66 prenup exports that used to sit
+  unreferenced in `public/gallery` and `public/hero` — kept so photos can be
+  swapped without re-exporting.
 
-Two things that will bite you:
+**To swap a photo:** upload it into that folder under the same filename,
+replacing the old asset, then delete that entry's `blurDataURL`. A Media
+Library upload keeps the filename as the public ID, with no random suffix.
 
-- **`sizes` starves the image.** Setting it to the exact CSS box width makes
-  `next/image` serve a 1x variant that is soft on any better display. Give it
-  roughly 2x headroom.
-- **Next caches optimised images under `.next/cache/images`, keyed by URL.**
-  Re-exporting a photo to the same path does *not* invalidate it — you will
-  keep being served the old, smaller variant. `rm -rf .next` and restart.
-- Writing a shell input file from Python on Windows produces CRLF, and the
-  trailing `
-` silently corrupts every URL in a `while read` loop. Pipe
-  through `tr -d '
-'`.
+**Export from the originals.** The set is in a shared Google Drive folder:
+fetch at `sz=w4000`, which returns the true originals (mostly 3504x2336).
+`sz=w2400` is Drive's *downscaled* render; an earlier pass re-encoded that and
+the full-bleed gallery looked visibly blurry. Upload the full-quality file;
+Cloudinary does the resizing.
 
-**The template only has ~24 image holders** (Hero 6, Venues 2, Story 6,
-Motif 1, Gallery 10), but 60 photos are exported. Roughly 40 files are
-unreferenced — kept so photos can be swapped without re-exporting. Prune
-them if repo size matters.
-
-[`app/lib/photos.ts`](app/lib/photos.ts) is **generated**, not hand-written.
-Chapters: `orchard · road · villa · summit · firelight · burgundy · highland`.
+`sizes` still matters: setting it to the exact CSS box width makes `next/image`
+request a 1x variant that looks soft on a better display. Give it about 2x.
 
 ---
 
@@ -150,11 +149,8 @@ from Leisther or Cristine. It has been removed. **Do not put it back.**
   deadline is shown — Justin confirmed on 2026-09-09 there isn't one yet, and
   a reply-by date is exactly the kind of thing guests act on, so don't invent
   one. It belongs in `wedding.ts` when it arrives.
-- The Venues cards now carry real venue photographs supplied by the couple —
-  `public/gallery/parish.jpg` and `public/gallery/reception.jpg`. These are
-  *not* part of the generated `lib/photos.ts` set, so `Venues.tsx` holds their
-  intrinsic size and blur inline; re-exporting the prenup set won't touch
-  them. Don't substitute stock venue images if they ever need replacing.
+- The Venues cards carry real venue photographs supplied by the couple —
+  `venue-ceremony.jpg` and `venue-reception.jpg` on Cloudinary. Don't substitute stock venue images if they ever need replacing.
 
 ---
 
