@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-display text-3xl font-light leading-tight md:text-4xl">
-              {COUPLE.groom.first}
-              <span className="mx-3 italic text-sand">&amp;</span>
+              {COUPLE.groom.first}{" "}
+              <span className="mx-1 italic text-sand">&amp;</span>{" "}
               {COUPLE.bride.first}
             </p>
             <p className="mt-4 text-[11px] uppercase tracking-widest2 text-ivory/50">

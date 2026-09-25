@@ -48,11 +48,11 @@ export default function Countdown() {
             <p className="text-center text-[11px] uppercase tracking-widest3 text-accent-bright">
               Counting down to the ceremony
             </p>
-            <div className="mt-8 grid grid-cols-4 gap-3 md:gap-8">
+            <div className="mt-8 grid grid-cols-4 gap-2 sm:gap-3 md:gap-8">
               {UNITS.map((unit) => (
                 <div
                   key={unit.key}
-                  className="border-l border-line-dark pl-3 text-center md:pl-6 md:text-left"
+                  className="border-l border-line-dark pl-2 text-center sm:pl-3 md:pl-6 md:text-left"
                 >
                   <p
                     className="font-display text-3xl font-light tabular-nums leading-none text-ink sm:text-5xl md:text-6xl"
@@ -62,7 +62,7 @@ export default function Countdown() {
                       ? "—"
                       : String(left[unit.key]).padStart(2, "0")}
                   </p>
-                  <p className="mt-2 text-[10px] uppercase tracking-widest2 text-muted md:mt-3">
+                  <p className="mt-2 text-[9px] uppercase tracking-normal text-muted sm:text-[10px] sm:tracking-widest2 md:mt-3">
                     {unit.label}
                   </p>
                 </div>

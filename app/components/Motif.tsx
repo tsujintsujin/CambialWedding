@@ -31,7 +31,7 @@ export default function Motif() {
                   style={{ backgroundColor: tone.hex }}
                 />
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[13px] uppercase tracking-widest2 text-ink">
+                  <span className="block text-[13px] uppercase tracking-widest text-ink sm:tracking-widest2">
                     {tone.name}
                   </span>
                   <span className="block text-xs text-muted">{tone.role}</span>
