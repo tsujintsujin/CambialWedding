@@ -134,7 +134,7 @@ export default function Rsvp() {
                 <legend className="text-[10px] uppercase tracking-widest2 text-muted">
                   Will you be there?
                 </legend>
-                <div className="mt-3 grid grid-cols-2 gap-3">
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {CHOICES.map((choice) => (
                     <label key={choice.label} className="block cursor-pointer">
                       <input
@@ -145,7 +145,7 @@ export default function Rsvp() {
                         onChange={() => setAttending(choice.value)}
                         className="peer sr-only"
                       />
-                      <span className="block border border-line-dark px-4 py-3 text-center text-[11px] uppercase tracking-widest2 text-ink/70 transition-colors duration-300 peer-checked:border-accent peer-checked:bg-accent peer-checked:text-paper peer-focus-visible:border-accent-bright">
+                      <span className="flex h-full items-center justify-center border border-line-dark px-4 py-3 text-center text-[11px] uppercase tracking-widest2 text-ink/70 transition-colors duration-300 peer-checked:border-accent peer-checked:bg-accent peer-checked:text-paper peer-focus-visible:border-accent-bright">
                         {choice.label}
                       </span>
                     </label>
@@ -154,25 +154,47 @@ export default function Rsvp() {
               </fieldset>
 
               {attending === true && (
-                <label className="block">
-                  {/* Explicitly block: the other fields only break onto a new
-                      line because their input is w-full. This one is not. */}
-                  <span className="block text-[10px] uppercase tracking-widest2 text-muted">
+                <div className="block">
+                  {/* A div, not a label: a label would forward taps on its
+                      text to the first button and quietly decrement. */}
+                  <span id="party-size-label" className="block text-[10px] uppercase tracking-widest2 text-muted">
                     How many of you?
                   </span>
-                  <input
-                    type="number"
-                    value={partySize}
-                    onChange={(e) =>
-                      setPartySize(
-                        Math.min(PARTY_MAX, Math.max(1, Number(e.target.value) || 1))
-                      )
-                    }
-                    min={1}
-                    max={PARTY_MAX}
-                    className="mt-2 w-20 border-b border-line-dark bg-transparent pb-2 font-display text-lg italic tabular-nums text-ink outline-none transition-colors duration-300 focus:border-accent-bright"
-                  />
-                </label>
+                  <div className="mt-2 flex items-center gap-3">
+                    <button
+                      type="button"
+                      aria-label="One fewer"
+                      disabled={partySize <= 1}
+                      onClick={() => setPartySize(partySize - 1)}
+                      className="flex h-10 w-10 items-center justify-center border border-line-dark text-lg text-ink transition-colors duration-300 hover:border-accent-bright disabled:opacity-30"
+                    >
+                      &minus;
+                    </button>
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      aria-labelledby="party-size-label"
+                      value={partySize}
+                      onChange={(e) =>
+                        setPartySize(
+                          Math.min(PARTY_MAX, Math.max(1, Number(e.target.value) || 1))
+                        )
+                      }
+                      min={1}
+                      max={PARTY_MAX}
+                      className="w-12 appearance-none border-b border-line-dark bg-transparent pb-2 text-center font-display text-lg italic tabular-nums text-ink outline-none transition-colors duration-300 focus:border-accent-bright [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    />
+                    <button
+                      type="button"
+                      aria-label="One more"
+                      disabled={partySize >= PARTY_MAX}
+                      onClick={() => setPartySize(partySize + 1)}
+                      className="flex h-10 w-10 items-center justify-center border border-line-dark text-lg text-ink transition-colors duration-300 hover:border-accent-bright disabled:opacity-30"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
               )}
 
               <label className="block">
