@@ -36,6 +36,11 @@ const config: Config = {
         shell: "1400px",
       },
       screens: {
+        // Most Android phones are 360px wide. The raw `desktop` screen below
+        // turns off Tailwind's arbitrary min-[...] variants, so this needs a
+        // name. Extended screens are emitted after sm/md, so never pair an
+        // xs: class with an sm:/md: class on the same property.
+        xs: "360px",
         // The Hero collage needs both real width and a mouse. Width alone lets
         // a landscape iPad through (1080-1366px), and pointer alone lets one
         // through with a trackpad attached, which reports a fine pointer — so
