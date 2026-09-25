@@ -207,15 +207,15 @@ export default function Envelope() {
             Nuptials
           </p>
 
-          <div className="mt-8 grid grid-cols-2 divide-x divide-line-dark">
+          <div className="mt-8 grid gap-6 divide-line-dark xs:grid-cols-2 xs:gap-0 xs:divide-x">
             <Role
-              className="px-3"
+              className="px-2 sm:px-3"
               nameClassName="mt-1 text-xl leading-tight sm:text-2xl md:text-4xl"
               label="Groom"
               names={[`${COUPLE.groom.first} ${COUPLE.groom.last}`]}
             />
             <Role
-              className="px-3"
+              className="px-2 sm:px-3"
               nameClassName="mt-1 text-xl leading-tight sm:text-2xl md:text-4xl"
               label="Bride"
               names={[`${COUPLE.bride.first} ${COUPLE.bride.last}`]}

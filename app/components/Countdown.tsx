@@ -48,11 +48,11 @@ export default function Countdown() {
             <p className="text-center text-[11px] uppercase tracking-widest3 text-accent-bright">
               Counting down to the ceremony
             </p>
-            <div className="mt-8 grid grid-cols-4 gap-2 sm:gap-3 md:gap-8">
+            <div className="mt-8 grid grid-cols-2 gap-x-1.5 gap-y-6 xs:grid-cols-4 sm:gap-3 md:gap-8">
               {UNITS.map((unit) => (
                 <div
                   key={unit.key}
-                  className="border-l border-line-dark pl-2 text-center sm:pl-3 md:pl-6 md:text-left"
+                  className="border-l border-line-dark pl-1 text-center sm:pl-3 md:pl-6 md:text-left"
                 >
                   <p
                     className="font-display text-3xl font-light tabular-nums leading-none text-ink sm:text-5xl md:text-6xl"

@@ -35,8 +35,13 @@ export default function Motif() {
                     {tone.name}
                   </span>
                   <span className="block text-xs text-muted">{tone.role}</span>
+                  {/* On phones the hex drops under the role, so the name
+                      has the row's full width. */}
+                  <span className="mt-1 block font-body text-[11px] uppercase tracking-widest2 text-muted sm:hidden">
+                    {tone.hex}
+                  </span>
                 </span>
-                <span className="font-body text-[11px] uppercase tracking-widest2 text-muted">
+                <span className="hidden font-body text-[11px] uppercase tracking-widest2 text-muted sm:inline">
                   {tone.hex}
                 </span>
               </li>

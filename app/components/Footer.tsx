@@ -24,7 +24,7 @@ export default function Footer() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-[11px] uppercase tracking-widest2 text-ivory/55 transition-colors duration-300 hover:text-sand"
+                className="text-[11px] uppercase tracking-widest text-ivory/55 xs:tracking-widest2 transition-colors duration-300 hover:text-sand"
               >
                 {link.label}
               </a>
