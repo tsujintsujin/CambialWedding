@@ -57,7 +57,6 @@ export const MOTIF = [
 ] as const;
 
 export const NAV_LINKS = [
-  { href: "#story", label: "Our Story" },
   { href: "#when", label: "When & Where" },
   { href: "#motif", label: "Colour Motif" },
   { href: "#rsvp", label: "RSVP" },
