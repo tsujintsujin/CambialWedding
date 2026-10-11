@@ -125,15 +125,6 @@ export default function Hero() {
           us as we begin this new chapter, surrounded by the people we love
           most.
         </motion.p>
-        <motion.a
-          href="#rsvp"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-10 inline-block border border-accent bg-accent px-8 py-4 text-[11px] uppercase tracking-widest2 text-paper transition-colors duration-300 hover:bg-transparent hover:text-accent"
-        >
-          RSVP
-        </motion.a>
       </div>
     </section>
   );

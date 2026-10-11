@@ -88,6 +88,12 @@ Section order (`app/page.tsx`) follows the template's, with the retained
 sections slotted in:
 `Hero · Countdown · Venues · Story · Motif · RSVP · Guestbook · Details · Gallery · Footer`
 
+**Post-wedding (2026-10-11):** the wedding has happened. The RSVP section is
+off the page (`Rsvp.tsx` kept, unrendered; Hero button and nav link removed)
+and the guestbook is read-only — notes show, the form is gone. The API
+routes still exist. On phones the note carousel uses ‹ n / N › controls,
+not dots: 41 dots overflowed the screen width.
+
 ---
 
 ## Media lives on Cloudinary, not in `public/`
