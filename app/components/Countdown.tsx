@@ -41,7 +41,7 @@ export default function Countdown() {
       <div className="mx-auto max-w-shell px-6 py-14 md:px-10 md:py-16">
         {passed ? (
           <p className="text-center font-display text-2xl italic text-ink md:text-3xl">
-            Today we say I do. Thank you for celebrating with us.
+            Thank you for celebrating with us.
           </p>
         ) : (
           <>
